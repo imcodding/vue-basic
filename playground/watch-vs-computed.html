@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ num }}
+        <button v-on:click="addNum">increase</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            computed: { //validation 또는 단순한 텍스트 연산 등에 사용. 권장
+                doubleNum: function() {
+                    return this.num * 2
+                }
+            },
+            watch: { //매번 실행되기 부담스러운 작업을 실행할 때 사용. 데이터 요청(axios)
+                num: function(newValue) {
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods: {
+                addNum: function() {
+                    this.num = this.num + 1;
+                },
+                logText: function() {
+                    console.log('changed')
+                },
+                fetchUserByNumber: function(num) {
+                    console.log(num)
+                }
+            },
+        })
+    </script>
+</body>
+</html>
